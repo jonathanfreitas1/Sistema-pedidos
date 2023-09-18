@@ -53,40 +53,41 @@ import { apiPeodutos } from '@/plugins/api';
 
     methods: {
       async validate () {
-        this.$refs.form.validate()
-        this.somenteNumeros();
-        if (!this.valor) {
-          this.notificacao = true;
-          this.tipoAlert = 'error';
-          this.textoAlert = 'Digite numeros no campo valor!';
-          setTimeout(() => {
-            this.notificacao = false;
-          }, 5000);
-        } else {
-        await apiPeodutos({
-          method: "post",
-          data: {
-            descricao: this.nome,
-            valoUnitario: this.valor,
+        if (this.$refs.form.validate()) {
+          this.somenteNumeros();
+          if (!this.valor) {
+            this.notificacao = true;
+            this.tipoAlert = 'error';
+            this.textoAlert = 'Digite numeros no campo valor!';
+            setTimeout(() => {
+              this.notificacao = false;
+            }, 5000);
+          } else {
+            await apiPeodutos({
+              method: "post",
+              data: {
+                descricao: this.nome,
+                valoUnitario: this.valor,
+              }
+            })
+            .then(() => {
+              this.notificacao = true;
+              this.tipoAlert = 'success';
+              this.textoAlert = 'Produto cadastrado!';
+              setTimeout(() => {
+                this.notificacao = false;
+                this.$router.go();
+              }, 5000);
+            })
+            .catch(() => {
+              this.notificacao = true;
+              this.tipoAlert = 'error';
+              this.textoAlert = 'Erro ao cadastrar novo produto!';
+              setTimeout(() => {
+                this.notificacao = false;
+              }, 5000);
+            })
           }
-        })
-        .then(() => {
-          this.notificacao = true;
-          this.tipoAlert = 'success';
-          this.textoAlert = 'Produto cadastrado!';
-          setTimeout(() => {
-            this.notificacao = false;
-            this.$router.go();
-          }, 5000);
-        })
-        .catch(() => {
-          this.notificacao = true;
-          this.tipoAlert = 'error';
-          this.textoAlert = 'Erro ao cadastrar novo produto!';
-          setTimeout(() => {
-            this.notificacao = false;
-          }, 5000);
-        })
         }
       },
 

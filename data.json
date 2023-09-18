@@ -25,7 +25,7 @@
       "id": 8
     },
     {
-      "nome": "Jon ",
+      "nome": "Jonathan teste ",
       "dataNascimento": "2023-09-07",
       "cpf": "180.709.750-16",
       "id": 9
@@ -41,6 +41,11 @@
       "descricao": "produto 3",
       "valoUnitario": 10,
       "id": 4
+    },
+    {
+      "descricao": "Teste",
+      "valoUnitario": "11",
+      "id": 6
     }
   ],
   "pedidos": [
